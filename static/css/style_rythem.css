@@ -1,0 +1,260 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    color-scheme: light only;
+    /* 强制使用浅色模式，忽略系统深色模式 */
+}
+
+#main {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    margin: auto 50px;
+    background-color: transparent;
+    transform: translateX(-50px);
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 30px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: auto;
+    margin-right: 20px;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.3s ease 0s;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+button.press {
+    background-color: red;
+    transform: scale(1.5);
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    transform: translateX(50px);
+}
+
+.container button {
+    position: relative;
+    margin-right: 0;
+}
+
+/* 修改粒子容器 */
+#particle-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 999;
+    /* 提高z-index确保在最上层 */
+    overflow: visible;
+    /* 改为visible允许粒子溢出容器 */
+}
+
+#square { 
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100px;
+    height: 850px;
+    background-color: rgba(0, 0, 0, 0);
+    margin: 0px 0px;
+    padding: 20px;
+    border-radius: 10px;
+    transition-property: background-color;
+    transition-duration: 1s;
+    transition-timing-function: ease-out;
+}
+
+#square.press {
+    background-color: rgba(0, 204, 255, 0.836);
+    transition-duration: 0.05s;
+    transition-timing-function: ease-in;
+}
+
+.particle {
+    position: absolute;
+    background: lime;
+    /* 基础绿色 */
+    border-radius: 0;
+    /* 方块效果 */
+    pointer-events: none;
+    z-index: 1000;
+    transform-origin: center;
+    /* 添加一点像素风的效果 */
+    image-rendering: pixelated;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+#video {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /*保持视频比例，裁剪视频*/
+    z-index: -1; /*视频在最底层*/
+}
+
+#virtual-space-button {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 30px;
+    background-color: rgba(255, 255, 255, 1);
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    text-align: center;
+    z-index: 1000;
+    user-select: none;
+    display: none;
+    /* 默认隐藏 */
+}
+
+#score {
+    color: rgb(98, 0, 255);
+    font-size: 2em;
+    font-weight: 700;
+    position: absolute;
+    top: 2%;
+    left: 2%;
+}
+
+#judgment {
+    color: rgb(98, 0, 255);
+    font-size: 2em;
+    font-weight: 700;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#judgment::before {
+    color: rgb(98, 0, 255);
+    font-size: 2em;
+    font-weight: 700;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards; /*保持动画结束时的状态*/
+    animation-timing-function: ease-in-out; /*动画的速度曲线，ease-in-out是先快后慢再快*/
+}
+
+#judgment.perfect::before { /*伪元素，虚拟html内元素*/
+    content: "PERFECT";
+    color: #00FF00;
+    animation-name: perfectAnimation;
+}
+
+#judgment.great::before {
+    content: "GREAT";
+    color: #0099ff;
+    animation-name: greatAnimation;
+}
+
+#judgment.good::before {
+    content: "GOOD";
+    color: #c8ff00;
+    animation-name: goodAnimation;
+}
+
+#judgment.miss::before {
+    content: "MISS";
+    color: #FF0000;
+    animation-name: missAnimation;
+}
+
+@keyframes perfectAnimation {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes greatAnimation {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes goodAnimation {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes missAnimation {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@media (max-width: 500px) { /*原768*/
+    #virtual-space-button {
+        display: block;
+    }
+
+    /* 调整其他元素在移动端的样式 */
+    /* button {
+        width: 40px;
+        height: 40px;
+        margin: 5px;
+    }
+
+    #judgment {
+        font-size: 36px;
+    } */
+
+    video {
+        display: none; /* 隐藏视频 */
+    }
+}

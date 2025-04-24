@@ -1,0 +1,174 @@
+* {
+    background-color: transparent;
+}
+
+:root {
+    color-scheme: light only;
+    /* 强制使用浅色模式，忽略系统深色模式 */
+}
+
+/* .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+} */
+
+#increment {
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 2em;
+    font-weight: 700;
+    border-radius: 50px;
+    border: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 100px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+
+    /* 下面代码是为了让按钮在手机上点击时不会出现蓝色的高亮效果 */
+    -webkit-tap-highlight-color: transparent;
+        /* 添加这行 */
+    -webkit-touch-callout: none;
+        /* 添加这行 */
+    user-select: none;
+        /* 添加这行 */
+}
+
+#increment:hover {
+    background-color: rgba(0, 136, 169, 0.7);
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#increment.clicked {
+    background-color: black;
+    color: white;
+    transform: translate(-50%, -50%) scale(0.95); /* 按钮使用了transform: translate(-50%, -50%)来居中定位，所以在添加scale效果时必须保留这个translate，否则按钮会失去居中效果。 */
+}
+
+.background {
+    display: block;
+    background: url(../assets/1f923.png);
+    background-repeat: no-repeat;
+    background-size: 50px;
+    background-position: center;
+    position: relative;
+    height: 50px;
+    width: 50px;
+    margin: 5px;
+    padding: 5px;
+    transition: all 0.3s ease 0s;
+}
+
+.bg {
+    background-color: #fde24f;
+    display: flex;
+    flex-wrap: wrap;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+    align-content: flex-start;
+    gap: 0;
+    z-index: -1;
+    overflow: hidden;
+    transition: all 0.3s ease 0s;
+}
+
+.bg.dark {
+    background-color: #16161a;
+}
+
+.background:hover {
+    transform: rotate(90deg);
+}
+
+#press {
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    font-weight: 700;
+    color: #ffffff; 
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.mode {
+    position: fixed;
+    top: 61.5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    font-weight: 700;
+    color: #ffffff; 
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.switch_toggle {
+    background-color: purple;
+    height: 40px;
+    width: 90px;
+    padding: 5px;
+    border-radius: 100px;
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+
+    /* 下面代码是为了让按钮在手机上点击时不会出现蓝色的高亮效果 */
+    -webkit-tap-highlight-color: transparent;
+        /* 添加这行 */
+    -webkit-touch-callout: none;
+        /* 添加这行 */
+    user-select: none;
+        /* 添加这行 */
+}
+
+.switch_toggle.active {
+    background-color: #4cd137;
+
+}
+
+.switch_circle {
+    background-color: white;
+    height: 30px;
+    width: 30px;
+    border-radius: 100px;
+    transition: all 0.3s ease 0s;
+    pointer-events: none;
+}
+
+.switch_circle.active {
+    transform: translateX(50px);
+}
+
+.return {
+    background-color: #7f5af0;
+    position: fixed;
+    top: 82%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    font-weight: 700;
+    color: #ffffff; 
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 900px) {
+    /* #increment:hover {
+        background-color: #ffffff;
+        color: #000000;
+    } */
+}

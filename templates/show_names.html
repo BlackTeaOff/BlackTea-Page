@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>提交的名字列表</title>
+</head>
+
+<body>
+    <h1>已提交的名字列表</h1>
+    <ul>
+        {% for name in names %}
+        <li>{{ name }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/bonus">返回</a>
+</body>
+
+</html>

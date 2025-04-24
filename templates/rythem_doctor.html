@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <title>rhythm_doctor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style_rythem.css')}}">
+</head>
+
+<body>
+    <audio id="newyear" src="{{ url_for('static', filename='assets/newyear.mp3') }}"></audio>
+    <video id="video" src="{{ url_for('static', filename='assets/newyear.mp4') }}" webkit-playsinline="true"
+        playsinline></video>
+    <div id="particle-container"></div>
+    <div id="judgment"></div>
+    <section id="main">
+        <button id="1">开始</button>
+        <button id="2"></button>
+        <button id="3"></button>
+        <button id="4"></button>
+        <button id="5"></button>
+        <button id="6"></button>
+
+        <div class="container">
+            <button id="7"></button>
+            <div id="square"></div>
+        </div>
+    </section>
+
+    <div id="score">score:</div>
+    <div id="virtual-space-button">在第七拍点我！</div>
+
+    <script>
+        let square = document.getElementById('square');
+
+        document.addEventListener('keydown', function (event) {
+            if (event.code === 'Space' || event.key === ' ' || event.keyCode === 32) {
+                square.classList.add('press');
+                createParticles();
+            }
+        });
+
+        document.addEventListener('keyup', function (event) {
+            if (event.code === 'Space' || event.key === ' ' || event.keyCode === 32) {
+
+                square.classList.remove('press');
+
+            }
+        });
+
+        // 以下都不是我写的
+        function createParticles() {
+            const square = document.getElementById('square');
+            const rect = square.getBoundingClientRect();
+            const particleContainer = document.getElementById('particle-container');
+
+            // 粒子产生中心点
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            // 增加粒子数量以形成更密集的环
+            const particleCount = Math.floor(Math.random() * 40) + 100;
+
+            // 创建更密集的环形效果
+            for (let i = 0; i < particleCount; i++) {
+                // 创建粒子元素
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+
+                // 增加粒子大小 (5-12px)，原来是(3-7px)
+                const size = Math.random() * 7 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+
+                // 设置为方块像素风格（移除圆角）
+                particle.style.borderRadius = '0';
+
+                // 初始位置在方块中心
+                particle.style.left = `${centerX}px`;
+                particle.style.top = `${centerY}px`;
+
+                // 绿色系颜色，亮度变化大
+                const hue = Math.random() * 40 + 90; // 90-130色相(绿色范围)
+                const saturation = Math.random() * 30 + 70; // 70%-100%饱和度
+                const lightness = Math.random() * 60 + 20; // 20%-80%亮度（更大范围的深浅变化）
+                particle.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+
+                // 随机透明度
+                particle.style.opacity = Math.random() * 0.5 + 0.5;
+
+                // 添加到容器
+                particleContainer.appendChild(particle);
+
+                // 创建均匀分布的圆形效果
+                const baseAngle = (i / particleCount) * Math.PI * 2; // 基础角度均匀分布
+                const angleVariation = (Math.random() * 0.2 - 0.1) * (Math.PI / 8); // 小范围随机偏移
+                const angle = baseAngle + angleVariation;
+
+                // 随机距离，控制形成环状
+                const minDistance = 120; // 最小距离
+                const maxDistance = 200; // 最大距离
+                const distance = Math.random() * (maxDistance - minDistance) + minDistance;
+
+                // 延长动画持续时间
+                const duration = Math.random() * 1.2 + 1.0; // 1.0-2.2秒
+
+                // 设置动画终点位置
+                const destinationX = centerX + Math.cos(angle) * distance;
+                const destinationY = centerY + Math.sin(angle) * distance;
+
+                // 应用动画 - 修改为先快后慢的效果
+                particle.animate([
+                    { // 开始状态
+                        transform: 'translate(-50%, -50%) scale(1)',
+                        opacity: particle.style.opacity
+                    },
+                    { // 快速移动阶段 - 在20%时间点
+                        transform: `translate(${(destinationX - centerX) * 0.7}px, ${(destinationY - centerY) * 0.7}px) scale(0.9)`,
+                        opacity: particle.style.opacity * 0.9,
+                        offset: 0.2 // 在20%的时间点
+                    },
+                    { // 减速阶段 - 在60%时间点
+                        transform: `translate(${(destinationX - centerX) * 0.9}px, ${(destinationY - centerY) * 0.9}px) scale(0.7)`,
+                        opacity: particle.style.opacity * 0.7,
+                        offset: 0.6 // 在60%的时间点
+                    },
+                    { // 缓慢消失阶段
+                        transform: `translate(${destinationX - centerX}px, ${destinationY - centerY}px) scale(0)`,
+                        opacity: 0
+                    }
+                ], {
+                    duration: duration * 1000,
+                    easing: 'cubic-bezier(0.22, 1, 0.36, 1)' // 修改为先快后慢的缓动函数
+                });
+
+                // 动画结束后移除粒子
+                setTimeout(() => {
+                    particleContainer.removeChild(particle);
+                }, duration * 1000);
+            }
+        }
+
+    </script>
+
+    <script>
+        var matrix = JSON.parse('{{ matrix|tojson|safe }}');
+        let buttons = document.querySelectorAll('button');
+        let judgment = document.getElementById('judgment');
+        let Elementscore = document.getElementById('score');
+
+        let score = 0;
+
+        // const PERFECT_RANGE = 100; // 完美范围
+        // const GREAT_RANGE = 200; // 很好范围
+        // const GOOD_RANGE = 300; // 一般范围
+        // const BAD_RANGE = 400; // 差范围
+        // const MISS_RANGE = 500; // 漏掉范围
+
+        function resetButtons() {
+            buttons.forEach(function (button) {
+                button.classList.remove('press');
+            });
+        }
+
+        function process(rowIndex) {
+            if (rowIndex >= matrix.length) {
+                return;
+            }
+
+            // let accumulatedDelay = 0;
+
+            for (let j = 0; j < matrix[rowIndex].length; j++) {
+
+                // accumulatedDelay += matrix[rowIndex][j]; // 所以用该值来计算出每个按钮的累计时间
+
+                let time = matrix[rowIndex][j];
+
+                setTimeout(function () { // 它的运行逻辑是先把每个按钮先设置延时时间，然后再执行，而不是立即按照该时间执行
+                    resetButtons();
+                    buttons[j].classList.add('press');
+
+                    setTimeout(function () {
+                        buttons[j].classList.remove('press');
+                    }, time);
+
+                }, time);
+
+
+                if (j === 6) {
+                    setTimeout(function () {
+                        let time = Date.now(); // 记录开始时间
+                        let presstime = 0;
+                        let duration = 0; // 按下的持续时间
+                        let judged = false; // 是否已经判断过
+
+                        setTimeout(function () {
+                            if (!judged) {
+                                // judgment.innerText = "MISS";
+                                judgment.className = "miss"; // 添加类名以应用样式
+                            }
+                        }, 800) // 1秒后判断为MISS
+
+                        document.addEventListener('keydown', function (event) {
+                            if (event.code === 'Space' || event.key === ' ' || event.keyCode === 32) {
+                                presstime = Date.now(); // 记录结束时间
+                            }
+
+                            judged = true; // 标记为已判断
+
+                            duration = Math.max(0, presstime - time - 100); // 减去50ms的偏移量，原本提前50ms按键perfect，现在正好按键perfect, 防止出现负数
+
+
+                            if (Math.abs(duration - 500) < 120) {
+                                // judgment.innerText = "PERFECT";
+                                judgment.className = "perfect"; // 添加类名以应用样式
+                                score += 100; // 增加分数
+                            }
+                            else if (Math.abs(duration - 500) < 200) {
+                                // judgment.innerText = "GREAT";
+                                judgment.className = "great"; // 添加类名以应用样式
+                                score += 80; // 增加分数
+                            } else if (Math.abs(duration - 500) < 300) {
+                                // judgment.innerText = "GOOD";
+                                judgment.className = "good"; // 添加类名以应用样式
+                                score += 60; // 增加分数
+                            } else if (Math.abs(duration - 500) < 400) {
+                                // judgment.innerText = "BAD";
+                                judgment.className = "bad"; // 添加类名以应用样式
+                                score += 40; // 增加分数
+                            } else if (Math.abs(duration - 500) <= 500) { // 包括duration = 0的情况
+                                // judgment.innerText = "MISS";
+                                judgment.className = "miss"; // 添加类名以应用样式
+                            } else {
+                                // judgment.innerText = "MISS";
+                                judgment.className = "miss"; // 添加类名以应用样式
+                            }
+                            //计算绝对值就可以了！！！！
+
+                            setTimeout(function () {
+                                judgment.className = "empty"; // 清除类名以恢复默认样式
+                            }, 1000); // 1秒后清除样式
+
+                            Elementscore.innerText = "score: " + score; // 显示分数
+
+                        }, { once: true }); // 只添加一次事件监听器
+                    }, time - 500);
+                }
+            }
+
+            process(rowIndex + 1);
+
+        }
+
+        function playSound(index) {
+            const sound = document.getElementById('newyear');
+            sound.currentTime = 0; // 重置音频播放时间到开始
+            sound.play(); // 播放音频
+        }
+
+        buttons[0].addEventListener('click', function () {
+            const video = document.getElementById('video');
+            video.currentTime = 0; // 重置视频播放时间到开始
+            video.play(); // 播放视频
+            //playSound(0); // 播放音频
+            buttons[0].style.pointerEvents = 'none';
+            buttons[0].innerText = '';
+            process(0); // 开始处理矩阵
+        }, { once: true }); // 只添加一次事件监听器
+
+        function useMatrix() {
+            for (let i = 0; i < matrix.length; i++) {
+                for (let j = 0; j < matrix[i].length; j++) {
+                    console.log(matrix[i][j]);
+
+                }
+            }
+        }
+    </script>
+
+    <script>
+        const virtualButton = document.getElementById('virtual-space-button');
+
+        virtualButton.addEventListener('touchstart', function (event) {
+            event.preventDefault(); // 阻止默认行为
+
+            const spaceEvent = new KeyboardEvent('keydown', {
+                code: 'Space',
+                key: ' ',
+                keyCode: 32,
+                which: 32,
+                bubbles: true // 允许事件冒泡
+            });
+
+            document.dispatchEvent(spaceEvent); // 触发keydown事件
+
+            setTimeout(function () {
+                const spaceEventUp = new KeyboardEvent('keyup', {
+                    code: 'Space',
+                    key: ' ',
+                    keyCode: 32,
+                    which: 32,
+                    bubbles: true // 允许事件冒泡
+                });
+
+                document.dispatchEvent(spaceEventUp); // 触发keyup事件
+            }, 200); // 按下200ms后松开
+        })
+    </script>
+</body>
+
+</html>

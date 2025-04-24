@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>窗口平滑移动</title>
+</head>
+
+<body>
+    <button>创建新窗口!</button>
+</body>
+
+<script>
+    let newWindow = null;
+    let button = document.querySelector('button');
+
+    button.addEventListener('click', function () {
+        newWindow = window.open('about:blank', 'moveableWindow', 'width=600,height=400');
+
+        if (newWindow) {
+            newWindow.document.write('<h1>这个窗口正在平滑移动！</h1>');
+
+            // 初始位置
+            let startX = 100, startY = 100;
+            newWindow.moveTo(startX, startY);
+
+            // 目标位置
+            let targetX = 500, targetY = 300;
+
+            // 动画参数
+            let duration = 2000; // 动画持续时间（毫秒）
+            let frames = 60;    // 总帧数
+            let frameTime = duration / frames; // 每帧时间
+            let currentFrame = 0;
+
+            // 创建动画
+            let animation = setInterval(function () {
+                if (currentFrame >= frames) {
+                    clearInterval(animation);
+                    return;
+                }
+
+                currentFrame++;
+
+                // 计算线性进度 (0到1之间)
+                let linearProgress = currentFrame / frames;
+
+                // 应用缓动缓出函数 (easeInOutQuad)
+                let easedProgress = easeInOutQuad(linearProgress);
+
+                // 根据缓动函数计算当前位置
+                let currentX = startX + ((targetX - startX) * easedProgress);
+                let currentY = startY + ((targetY - startY) * easedProgress);
+
+                if (newWindow && !newWindow.closed) {
+                    newWindow.moveTo(currentX, currentY);
+                } else {
+                    clearInterval(animation);
+                }
+            }, frameTime);
+        } else {
+            alert('新窗口被阻止了，请检查浏览器设置。');
+        }
+    });
+
+    // 缓动缓出的数学函数
+    function easeInOutQuad(t) {
+        return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    }
+</script>
+
+</html>

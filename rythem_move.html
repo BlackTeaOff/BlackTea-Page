@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>窗口平滑移动</title>
+</head>
+
+<body>
+    <button>创建新窗口!</button>
+</body>
+
+<script>
+    let newWindow = null;
+
+    let newWindow1 = null;
+    let newWindow2 = null;
+    let newWindow3 = null;
+    let newWindow4 = null;
+    let newWindow5 = null;
+    let newWindow6 = null;
+    let newWindow7 = null;
+
+    let button = document.querySelector('button');
+
+    button.addEventListener('click', function () {
+        // 打开新窗口
+        newWindow = window.open('/rythem', 'moveableWindow', 'width=600,height=400');
+
+        if (newWindow) {
+            // 等待新窗口加载完成
+            newWindow.onload = function () {
+                try {
+                    // 获取要点击的元素（假设是ID为'square'的元素）
+                    const targetElement = newWindow.document.getElementById('1');
+
+                    if (targetElement) {
+                        console.log('找到目标元素，已添加点击事件');
+
+                        // 为目标元素添加点击事件
+                        targetElement.addEventListener('click', function () {
+                            setTimeout(function () {
+                                newWindow.moveTo(500, 300);
+                            }, 3200);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(0, 300);
+                            }, 3683);
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 0, y: 300 }, { x: 100, y: 300 }, 'linear', 500);
+                            }, 3684);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(300, 300);
+                            }, 4311);
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 300, y: 300 }, { x: 350, y: 300 }, 'linear', 180);
+                            }, 4312);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(550, 300);
+                            }, 4508);
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 550, y: 300 }, { x: 650, y: 300 }, 'linear', 500);
+                            }, 4509);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(850, 300);
+                            }, 5147);
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 850, y: 300 }, { x: 900, y: 300 }, 'linear', 180);
+                            }, 5148);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(950, 300);
+                            }, 5362);
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 950, y: 300 }, { x: 950, y: 400 }, 'linear', 500);
+                            }, 5363);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(950, 300);
+                            }, 5961);
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 950, y: 300 }, { x: 950, y: 250}, 'linear', 90);
+                            }, 5962);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(0, 250);
+                            }, 6250);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(550, 250);
+                            }, 6600);
+
+                            // row2
+                            setTimeout(function () {
+                                newWindow.moveTo(0, 0);
+                            }, 7000);
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 0, y: 0 }, { x: 200, y: 0}, 'linear', 500);
+                            }, 7001);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(950, 100);
+                            }, 7602);
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 950, y: 100 }, { x: 850, y: 100 }, 'linear', 200);
+                            }, 7603);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(0, 200);
+                            }, 7877);
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 0, y: 200 }, { x: 200, y: 200 }, 'linear', 500);
+                            }, 7878);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(950, 300);
+                            }, 8417);
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 950, y: 300 }, { x: 800, y: 300 }, 'linear', 200);
+                            }, 8418);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(0, 400);
+                            }, 8653);
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 0, y: 400 }, { x: 200, y: 400 }, 'linear', 500);
+                            }, 8654);
+                            
+                            setTimeout(function () {
+                                newWindow.moveTo(700, 400);
+                            }, 9271);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 700, y: 400 }, { x: 400, y: 200 }, 'easeInOut', 2500);
+                                moveWindow(newWindow, startPos, endPos, 'easeInOut', 2000);
+                            }, 9487);
+
+                            // row3
+                            setTimeout(function () {
+                                newWindow.moveTo(0, 400);
+                            }, 12762);
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 0, y: 200 }, { x: 50, y: 200 }, 'fastSlow', 150);
+                            }, 12763);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 50, y: 200 }, { x: 100, y: 200 }, 'fastSlow', 150);
+                            }, 12969);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 100, y: 200 }, { x: 150, y: 200 }, 'fastSlow', 150);
+                            }, 13165);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 150, y: 200 }, { x: 200, y: 200 }, 'fastSlow', 150);
+                            }, 13370);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 250, y: 200 }, { x: 300, y: 200 }, 'fastSlow', 150);
+                            }, 13566);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 300, y: 200 }, { x: 350, y: 200 }, 'fastSlow', 150);
+                            }, 13773);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 400, y: 200 }, { x: 450, y: 200 }, 'fastSlow', 150);
+                            }, 13970);
+
+                            // row4
+                            setTimeout(function () {
+                                newWindow.moveTo(900, 200);
+                            }, 14413);
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 900, y: 200 }, { x: 800, y: 200 }, 'fastSlow', 150);
+                            }, 14414);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 50, y: 200 }, { x: 100, y: 200 }, 'fastSlow', 150);
+                            }, 14609);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 100, y: 200 }, { x: 150, y: 200 }, 'fastSlow', 150);
+                            }, 14806);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 150, y: 200 }, { x: 200, y: 200 }, 'fastSlow', 150);
+                            }, 15002);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 250, y: 200 }, { x: 300, y: 200 }, 'fastSlow', 150);
+                            }, 15198);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 300, y: 200 }, { x: 350, y: 200 }, 'fastSlow', 150);
+                            }, 15395);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 400, y: 200 }, { x: 450, y: 200 }, 'fastSlow', 150);
+                            }, 15591);
+
+                            // row5
+                            setTimeout(function () {
+                                newWindow.moveTo(0, 200);
+                            }, 16074);
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 0, y: 200 }, { x: 100, y: 200 }, 'fastSlow', 150);
+                            }, 16075);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 700, y: 200 }, { x: 600, y: 200 }, 'fastSlow', 150);
+                            }, 16270);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 500, y: 200 }, { x: 400, y: 200 }, 'fastSlow', 150);
+                            }, 16466);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 400, y: 200 }, { x: 300, y: 200 }, 'fastSlow', 150);
+                            }, 16663);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 300, y: 200 }, { x: 200, y: 200 }, 'fastSlow', 150);
+                            }, 16859);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 200, y: 200 }, { x: 100, y: 200 }, 'fastSlow', 150);
+                            }, 17056);
+
+                            setTimeout(function () {
+                                 moveWindow(newWindow, { x: 100, y: 200 }, { x: 0, y: 200 }, 'fastSlow', 150);
+                            }, 17252);
+
+                            // row6
+                            setTimeout(function () {
+                                newWindow.moveTo(0, 0);
+                            }, 17730);
+
+                            setTimeout(function () {
+                                newWindow.resizeBy(80, 80);
+                            }, 17927);
+
+                            setTimeout(function () {
+                                newWindow.resizeBy(80, 80);
+                            }, 18123);
+
+                            setTimeout(function () {
+                                newWindow.resizeBy(80, 80);
+                            }, 18320);
+
+                            setTimeout(function () {
+                                newWindow.resizeBy(80, 80);
+                            }, 18516);
+
+                            setTimeout(function () {
+                                newWindow.resizeBy(80, 80);
+                            }, 18713);
+
+                            setTimeout(function () {
+                                newWindow.resizeBy(80, 80);
+                            }, 18909);
+                            
+                            setTimeout(function () {
+                                newWindow.resizeTo(600, 400);
+                            }, 18940);
+
+                            // row7
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 0, y: 0 }, { x: 100, y: 700 }, 'easeInOut', 400);
+                            }, 19380);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 100, y: 700 }, { x: 200, y: 0 }, 'fastSlow', 400);
+                            }, 19796);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 200, y: 0 }, { x: 300, y: 500 }, 'fastSlow', 400);
+                            }, 20211);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 300, y: 500 }, { x: 400, y: 0 }, 'fastSlow', 400);
+                            }, 20627);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 400, y: 0 }, { x: 500, y: 400 }, 'fastSlow', 400);
+                            }, 21042);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 500, y: 400 }, { x: 600, y: 100 }, 'fastSlow', 400);
+                            }, 21458);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(1000, 200);
+                                // moveWindow(newWindow, { x: 600, y: 100 }, { x: 700, y: 50 }, 'fastSlow', 400);
+                            }, 21873);
+
+                            // row8
+                            setTimeout(function () {
+                                newWindow.moveTo(0, 0);
+                                // moveWindow(newWindow, { x: 600, y: 100 }, { x: 700, y: 50 }, 'fastSlow', 400);
+                            }, 22698);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(900, 0);
+                                // moveWindow(newWindow, { x: 600, y: 100 }, { x: 700, y: 50 }, 'fastSlow', 400);
+                            }, 23313);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(0, 700);
+                                // moveWindow(newWindow, { x: 600, y: 100 }, { x: 700, y: 50 }, 'fastSlow', 400);
+                            }, 23526);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(900, 700);
+                                // moveWindow(newWindow, { x: 600, y: 100 }, { x: 700, y: 50 }, 'fastSlow', 400);
+                            }, 24134);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(450, 250);
+                                // moveWindow(newWindow, { x: 600, y: 100 }, { x: 700, y: 50 }, 'fastSlow', 400);
+                            }, 24347);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(0, 250);
+                                // moveWindow(newWindow, { x: 600, y: 100 }, { x: 700, y: 50 }, 'fastSlow', 400);
+                            }, 24975);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(900, 250);
+                                // moveWindow(newWindow, { x: 600, y: 100 }, { x: 700, y: 50 }, 'fastSlow', 400);
+                            }, 25177);
+
+                            // rest
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 900, y: 250 }, { x: 800, y: 200 }, 'slowFast', 150);
+                            }, 25707);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 800, y: 200 }, { x: 700, y: 250 }, 'linear', 150);
+                            }, 25900);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 700, y: 250 }, { x: 600, y: 200 }, 'linear', 150);
+                            }, 26100);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 600, y: 200 }, { x: 500, y: 250 }, 'linear', 150);
+                            }, 26300);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 500, y: 250 }, { x: 400, y: 200 }, 'linear', 150);
+                            }, 26500);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 400, y: 200 }, { x: 300, y: 250 }, 'linear', 150);
+                            }, 26700);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 300, y: 250 }, { x: 200, y: 200 }, 'linear', 150);
+                            }, 26900);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 200, y: 200 }, { x: 100, y: 250 }, 'linear', 150);
+                            }, 27100);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 100, y: 250 }, { x: 0, y: 200 }, 'linear', 150);
+                            }, 27300);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 0, y: 200 }, { x: 100, y: 100 }, 'linear', 150);
+                            }, 27500);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 100, y: 100 }, { x: 150, y: 150 }, 'linear', 150);
+                            }, 27700);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 150, y: 150 }, { x: 200, y: 100 }, 'linear', 150);
+                            }, 27900);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 200, y: 100 }, { x: 250, y: 150 }, 'linear', 150);
+                            }, 28100);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 250, y: 150 }, { x: 300, y: 100 }, 'linear', 150);
+                            }, 28300);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 300, y: 100 }, { x: 350, y: 150 }, 'linear', 150);
+                            }, 28500);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 350, y: 150 }, { x: 400, y: 100 }, 'linear', 150);
+                            }, 28700);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 400, y: 100 }, { x: 450, y: 150 }, 'easeOut', 150);
+                            }, 28900);
+
+                            // row9
+                            setTimeout(function () {
+                                newWindow.resizeTo(600, 400);
+                            }, 29000);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 450, y: 100 }, { x: 550, y: 300 }, 'fastSlow', 150);
+                            }, 29001);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 550, y: 300 }, { x: 550, y: 250 }, 'fastSlow', 150);
+                                newWindow1 = window.open('about:blank', 'moveableWindow1', 'width=600,height=400');
+                                newWindow1.moveTo(10, 10);
+                                setTimeout(function () {
+                                    newWindow.focus();
+                                }, 100);
+                            }, 29323);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 550, y: 250 }, { x: 550, y: 350 }, 'fastSlow', 150);
+                                newWindow2 = window.open('about:blank', 'moveableWindow2', 'width=600,height=400');
+                                newWindow2.moveTo(20, 20);
+                                setTimeout(function () {
+                                    newWindow.focus();
+                                }, 100);
+                            }, 29526);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 550, y: 350 }, { x: 550, y: 250 }, 'fastSlow', 150);
+                                newWindow3 = window.open('about:blank', 'moveableWindow3', 'width=600,height=400');
+                                newWindow3.moveTo(30, 30);
+                                setTimeout(function () {
+                                    newWindow.focus();
+                                }, 100);
+                            }, 29729);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 550, y: 250 }, { x: 550, y: 350 }, 'fastSlow', 150);
+                                newWindow4 = window.open('about:blank', 'moveableWindow4', 'width=600,height=400');
+                                newWindow4.moveTo(40, 40);
+                                setTimeout(function () {
+                                    newWindow.focus();
+                                }, 100);
+                            }, 29942);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 550, y: 350 }, { x: 550, y: 250 }, 'fastSlow', 150);
+                                newWindow5 = window.open('about:blank', 'moveableWindow5', 'width=600,height=400');
+                                newWindow5.moveTo(50, 50);
+                                setTimeout(function () {
+                                    newWindow.focus();
+                                }, 100);
+                            }, 30154);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 550, y: 250 }, { x: 550, y: 350 }, 'fastSlow', 150);
+                                newWindow6 = window.open('about:blank', 'moveableWindow6', 'width=600,height=400');
+                                newWindow6.moveTo(60, 60);
+                                setTimeout(function () {
+                                    newWindow.focus();
+                                }, 100);
+                            }, 30358);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 550, y: 350 }, { x: 550, y: 300 }, 'fastSlow', 150);
+                                newWindow7 = window.open('about:blank', 'moveableWindow7', 'width=600,height=400');
+                                newWindow7.moveTo(70, 70);
+                                setTimeout(function () {
+                                    newWindow.focus();
+                                }, 100);
+                            }, 30560);
+
+                            setTimeout(function () {
+                                newWindow1.close();
+                            }, 30570);
+
+                            setTimeout(function () {
+                                newWindow2.close();
+                            }, 30600);
+
+                            setTimeout(function () {
+                                newWindow3.close();
+                            }, 30630);
+
+                            setTimeout(function () {
+                                newWindow4.close();
+                            }, 30660);
+
+                            setTimeout(function () {
+                                newWindow5.close();
+                            }, 30690);
+
+                            setTimeout(function () {
+                                newWindow6.close();
+                            }, 30720);
+
+                            setTimeout(function () {
+                                newWindow7.close();
+                            }, 30750);
+
+                            // row10
+                            setTimeout(function () {
+                                newWindow.resizeTo(600, 400);
+                            }, 30780);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 550, y: 300 }, { x: 550, y: 300 }, 'fastSlow', 150);
+                                window1 = window.open('about:blank', 'moveableWindow1', 'width=300,height=300');
+
+                            }, 30781);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 550, y: 300 }, { x: 500, y: 300 }, 'fastSlow', 150);
+                                window2 = window.open('about:blank', 'moveableWindow2', 'width=300,height=300');
+                                window2.moveTo(400, 0);
+                            }, 30979);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 500, y: 300 }, { x: 600, y: 300 }, 'fastSlow', 150);
+                                window3 = window.open('about:blank', 'moveableWindow3', 'width=300,height=300');
+                                window3.moveTo(800, 0);
+                            }, 31184);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 600, y: 300 }, { x: 500, y: 300 }, 'fastSlow', 150);
+                                window4 = window.open('about:blank', 'moveableWindow4', 'width=300,height=300');
+                                window4.moveTo(1600, 0);
+                            }, 31391);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 500, y: 300 }, { x: 600, y: 300 }, 'fastSlow', 150);
+                                window5 = window.open('about:blank', 'moveableWindow5', 'width=300,height=300');
+                                window5.moveTo(1600, 600);
+                            }, 31598);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 600, y: 300 }, { x: 500, y: 300 }, 'fastSlow', 150);
+                                window6 = window.open('about:blank', 'moveableWindow6', 'width=300,height=300');
+                                window6.moveTo(400, 600);
+                            }, 31805);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 500, y: 300 }, { x: 600, y: 300 }, 'fastSlow', 150);
+                                window7 = window.open('about:blank', 'moveableWindow7', 'width=300,height=300');
+                                window7.moveTo(0, 600);
+                            }, 32012);
+
+                            setTimeout(function () {
+                                moveWindow(newWindow, { x: 600, y: 300 }, { x: 500, y: 300 }, 'fastSlow', 150);
+                            }, 32219);
+
+                            setTimeout(function () {
+                                window1.close();
+                            }, 32260);
+
+                            setTimeout(function () {
+                                window2.close();
+                            }, 32290);
+
+                            setTimeout(function () {
+                                window3.close();
+                            }, 32320);
+
+                            setTimeout(function () {
+                                window4.close();
+                            }, 32350);
+
+                            setTimeout(function () {
+                                window5.close();
+                            }, 32380);
+
+                            setTimeout(function () {
+                                window6.close();
+                            }, 32410);
+
+                            setTimeout(function () {
+                                window7.close();
+                            }, 32440);
+
+
+                            // row11
+                            setTimeout(function () {
+                                newWindow.moveTo(0, 0);
+                                moveWindow(newWindow, { x: 0, y: 0 }, { x: 100, y: 0 }, 'linear', 50);
+                            }, 32631);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(700, 200);
+                                moveWindow(newWindow, { x: 700, y: 200 }, { x: 800, y: 200 }, 'linear', 50);
+                            }, 32840);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(100, 300);
+                                moveWindow(newWindow, { x: 100, y: 300 }, { x: 200, y: 300 }, 'linear', 50);
+                            }, 33050);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(200, 600);
+                                moveWindow(newWindow, { x: 200, y: 600 }, { x: 300, y: 600 }, 'linear', 50);
+                            }, 33228);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(500, 200);
+                                moveWindow(newWindow, { x: 400, y: 100 }, { x: 600, y: 100 }, 'linear', 50);
+                            }, 33464);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(500, 300);
+                                moveWindow(newWindow, { x: 500, y: 300 }, { x: 400, y: 300 }, 'linear', 50);
+                            }, 33638);
+
+                            setTimeout(function () {
+                                newWindow.moveTo(950, 300);
+                            }, 33900);
+
+                            // row12
+                            setTimeout(function () {
+                                newWindow.resizeTo(600, 400);
+                                moveWindow(newWindow, { x: 950, y: 300 }, { x: 0, y: 300 }, 'easeInOut', 1700);
+                                Window1 = window.open('about:blank', 'moveableWindow1', 'width=300,height=300');
+                                Window1.moveTo(950, 0);
+                            }, 34263);
+
+                            setTimeout(function () {
+                                Window2 = window.open('about:blank', 'moveableWindow1', 'width=300,height=300');
+                                Window2.moveTo(850, 0);
+                                Window1.close();
+                            }, 34473);
+
+                            setTimeout(function () {
+                                Window3 = window.open('about:blank', 'moveableWindow2', 'width=300,height=300');
+                                Window3.moveTo(750, 0);
+                                Window2.close();
+                            }, 34677);
+
+                            setTimeout(function () {
+                                Window4 = window.open('about:blank', 'moveableWindow3', 'width=300,height=300');
+                                Window4.moveTo(650, 0);
+                                Window3.close();
+                            }, 34884);
+
+                            setTimeout(function () {
+                                Window5 = window.open('about:blank', 'moveableWindow4', 'width=300,height=300');
+                                Window5.moveTo(550, 0);
+                                Window4.close();
+                            }, 35095);
+
+                            setTimeout(function () {
+                                Window6 = window.open('about:blank', 'moveableWindow5', 'width=300,height=300');
+                                Window6.moveTo(450, 0);
+                                Window5.close();
+                            }, 35298);
+
+                            setTimeout(function () {
+                                Window7 = window.open('about:blank', 'moveableWindow6', 'width=300,height=300');
+                                Window7.moveTo(350, 0);
+                                Window6.close();
+                            }, 35502);
+
+
+
+
+
+                            // 定义起始和结束位置
+                            // 开始窗口移动动画
+                            // moveWindow(newWindow, startPos, endPos, 'easeInOut', 2000, function () {
+                            //     console.log('窗口移动完成！');
+                            // });
+                        }, { once: true }); // 只添加一次点击事件
+                    } else {
+                        console.error('未找到目标元素');
+                    }
+                } catch (error) {
+                    console.error('访问新窗口元素时出错:', error);
+                }
+            };
+        } else {
+            alert('新窗口被阻止了，请检查浏览器设置。');
+        }
+    });
+
+    /**
+     * 让窗口平滑移动到指定位置
+     * @param {Window} windowObj - 要移动的窗口对象
+     * @param {Object} startPos - 起始位置 {x, y}
+     * @param {Object} endPos - 目标位置 {x, y}
+     * @param {string} easingType - 缓动类型: 'linear', 'easeIn', 'easeOut', 'easeInOut', 'fastSlow', 'slowFast'
+     * @param {number} duration - 动画持续时间(毫秒)
+     * @param {Function} callback - 动画完成后的回调函数
+     */
+    function moveWindow(windowObj, startPos, endPos, easingType = 'easeInOut', duration = 2000, callback) {
+        // 确保窗口对象有效
+        if (!windowObj || windowObj.closed) {
+            console.error('无效的窗口对象');
+            return;
+        }
+
+        // 设置初始位置
+        windowObj.moveTo(startPos.x, startPos.y);
+
+        // 动画参数
+        const frames = 60;    // 总帧数
+        const frameTime = duration / frames; // 每帧时间
+        let currentFrame = 0;
+
+        // 各种缓动函数
+        const easingFunctions = {
+            // 线性匀速
+            linear: t => t,
+
+            // 缓入
+            easeIn: t => t * t,
+
+            // 缓出
+            easeOut: t => 1 - Math.pow(1 - t, 2),
+
+            // 缓入缓出
+            easeInOut: t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2,
+
+            // 先快后慢
+            fastSlow: t => 1 - Math.pow(1 - t, 3),
+
+            // 先慢后快
+            slowFast: t => t * t * t
+        };
+
+        // 获取选定的缓动函数，默认为线性
+        const easingFunction = easingFunctions[easingType] || easingFunctions.linear;
+
+        // 创建动画
+        const animation = setInterval(function () {
+            if (currentFrame >= frames) {
+                clearInterval(animation);
+                if (typeof callback === 'function') callback();
+                return;
+            }
+
+            currentFrame++;
+
+            // 计算线性进度 (0到1之间)
+            const linearProgress = currentFrame / frames;
+
+            // 应用选定的缓动函数
+            const easedProgress = easingFunction(linearProgress);
+
+            // 根据缓动函数计算当前位置
+            const currentX = startPos.x + ((endPos.x - startPos.x) * easedProgress);
+            const currentY = startPos.y + ((endPos.y - startPos.y) * easedProgress);
+
+            if (windowObj && !windowObj.closed) {
+                windowObj.moveTo(Math.round(currentX), Math.round(currentY));
+            } else {
+                clearInterval(animation);
+            }
+        }, frameTime);
+
+        // 返回动画ID，方便外部停止
+        return animation;
+    }
+</script>
+
+</html>

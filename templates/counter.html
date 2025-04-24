@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <style>
+        .logo {
+            color: rgb(255, 255, 255)
+        }
+
+        .counter {
+            color: #313131;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_counter.css')}}">
+    <title>Navbar</title>
+</head>
+
+<body>
+
+    <!-- <div class="background"></div> -->
+    <section class="bg">
+    {% for i in range(0, 500) %}
+        <div class="background"></div>
+    {% endfor %}
+    </section>
+
+    <header>
+        <a href="https://space.bilibili.com/111118089">
+            <h1 class="logo">BlackTea</h1>
+        </a>
+        <div class="toggle"></div> <!--菜单-->
+        <nav>
+            <ul class="nav_links">
+                <li><a href="http://192.168.246.97:5001">在线vscode</a></li> <!--a超链接-->
+                <li><a href="#" class="counter">Counter</a></li>
+                <li><a href="/rythem">RythemDoctor</a></li>
+            </ul>
+        </nav>
+        <a href="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4"
+            class="cta"><button>Contact</button></a>
+    </header>
+
+    <p id="press">请戳我!</p>
+    <button id="increment">{{ count }}</button>
+
+    <p class="mode">切换模式</p>
+
+    <div class="switch_toggle">
+        <div class="switch_circle">
+        </div>
+    </div>
+
+    <a href="/">
+    <button class="return">主菜单</button>
+    </a>
+
+    <section class="bar">
+        <nav>
+            <ul class="control">
+                <li><a href="http://192.168.246.97:5001">在线vscode</a></li>
+                <li><a href="#" class="counter">Counter</a></li>
+                <li><a href="/rythem">RythemDoctor</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <script>
+        let menuToggle = document.querySelector('.toggle');
+        let baractive = document.querySelector('.control');
+
+        menuToggle.addEventListener('click', function () {
+            menuToggle.classList.toggle('active'); //用来切换类名
+            baractive.classList.toggle('active');
+        })
+
+        let button = document.querySelector('#increment');
+        button.addEventListener('click', async function() {
+            let response = await fetch('/counter', {method: 'POST'}); // 发送POST请求到/counter
+            // response:{"count":1}
+            let data = await response.json(); // 解析JSON数据
+            button.innerText = data.count;
+        })
+
+        function autoRefreshCounter() {
+            setInterval(async function() {
+                let response = await fetch('/counter');
+                let data = await response.json();
+                button.innerText = data.count; 
+            }, 1000)
+        }
+        autoRefreshCounter(); // 启动自动刷新计数器
+    </script>
+
+    <script>
+        let press = document.querySelector("#press");
+        let increment = document.querySelector("#increment");
+        increment.addEventListener('click', function() {
+            // increment.style.backgroundColor ="black" //原background-color, js里-不可用, 使用驼峰法
+            increment.classList.add("clicked"); // 在increment加上style="clicked"
+            press.style.left = "51%"
+            press.innerText = "你戳了我！";
+
+            setTimeout(function() {
+                increment.classList.remove("clicked");
+                // increment.style.backgroundColor = "#ffffff";
+            }, 200) // 300ms后执行
+        })
+    </script>
+
+    <script>
+        let toggle = document.querySelector(".switch_toggle");
+        let circle = document.querySelector(".switch_circle");
+        let bg = document.querySelector(".bg");
+        toggle.addEventListener('click', function () {
+                if (toggle.classList.contains("active")) {
+                    toggle.classList.remove("active");
+                    circle.classList.remove("active");
+                    bg.classList.remove("dark");
+                } else {
+                    toggle.classList.add("active");
+                    circle.classList.add("active");
+                    bg.classList.add("dark");
+                }
+            })
+    </script>
+    <!-- <div class="menu">
+        <ul>
+            <li><a href=""></a>NavBarLeft</li>
+            <li><a href=""></a>NavBarCenter</li>
+            <li><a href=""></a>NavBarRight</li>
+        </ul>
+    </div> -->
+
+</body>
+
+</html>

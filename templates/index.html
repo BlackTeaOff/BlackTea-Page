@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <style>
+        .logo{
+            color: rgb(255, 255, 255)
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>欢迎！</title>
+</head>
+<body>
+    <header> 
+        <a href="https://space.bilibili.com/111118089"><h1 class="logo">BlackTea</h1></a>
+        <div class="toggle"></div> <!--菜单-->
+        <nav>
+            <ul class="nav_links">
+                <li><a href="http://192.168.246.97:5001">在线vscode</a></li> <!--a超链接-->
+                <li><a href="/counterpage">Counter</a></li>
+                <li><a href="/rythem">RythemDoctor</a></li>
+            </ul>
+        </nav>
+        <a href="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4" class="cta"><button>彩蛋！</button></a>
+    </header>
+
+    <section class="showcase"> <!--一节，阅读方便-->
+        <div class="text">
+            <h2>欢迎来到我的主页！</h2>
+            <h3>I'm BlackTea!</h3>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum, exercitationem qui amet vel est velit minima?</p>
+            <a href="/rickroll">JOIN NOW!</a>
+        </div>
+    </section>
+
+    <section class="bar">
+        <nav>
+            <ul class="control">
+                <li><a href="http://192.168.246.97:5001">在线vscode</a></li>
+                <li><a href="/counterpage">Counter</a></li>
+                <li><a href="/rythem">RythemDoctor</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <script>
+        let menuToggle = document.querySelector('.toggle');
+        let baractive = document.querySelector('.control');
+
+        menuToggle.addEventListener('click', function() {
+            menuToggle.classList.toggle('active'); //用来切换类名
+            baractive.classList.toggle('active');
+        })
+    </script>
+    <!-- <div class="menu">
+        <ul>
+            <li><a href=""></a>NavBarLeft</li>
+            <li><a href=""></a>NavBarCenter</li>
+            <li><a href=""></a>NavBarRight</li>
+        </ul>
+    </div> -->
+
+    <video src="{{ url_for('static', filename='assets/Output+光影.mp4') }}" muted autoplay loop></video>
+
+</body>
+</html>

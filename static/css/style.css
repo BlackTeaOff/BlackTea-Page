@@ -1,0 +1,268 @@
+@import url('https: //fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+*{
+    box-sizing: border-box;
+    margin: 0;  /*外边距*/
+    padding: 0; /*内边距*/
+    /* background-color: #24252a */
+}
+
+:root {
+    color-scheme: light only;
+    /* 强制使用浅色模式，忽略系统深色模式 */
+}
+
+li,a,button{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #edf0f1;
+    text-decoration: none; /*下划线*/
+}
+
+header{
+    display: flex; /*弹性盒子*/
+    justify-content: space-between; /*对齐方式属性，这个是平均分配空间(水平方向，主轴)*/
+    align-items: center; /*垂直方向对齐，交叉轴*/
+    padding: 20px 10%; /*内边距, 第一个上下，第二个左右*/
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    z-index: 1;
+}
+
+.logo{
+    cursor: pointer; /*改变鼠标在上面悬停时的鼠标样式*/
+}
+
+.nav_links{
+    list-style: none; /*去掉了无序标签前面的圆圈*/
+    transition: 0.3s;
+}
+
+.nav_links li{
+    display: inline-block; /*并排显示*/
+    padding: 0px 20px; /*内边距*/
+}
+
+.nav_links li a{
+    transition: all 0.3s ease 0s; /*all-所有可动画的css都会被应用动画，过渡时间0.3s，ease过度曲线，0s延迟时间*/
+}
+
+.nav_links li a:hover{ /*鼠标悬停*/
+    color: #0088a9
+}
+
+button{
+    padding: 9px 25px; /*内边距，上下9，左右25*/
+    background-color: rgba(0, 136, 169, 1); /*a代表alpha，0完全透明，1完全不透明*/
+    border: none; /*边框*/
+    border-radius: 50px; /*圆角*/
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+[lang="zh-CN"] button { /*让中文横着排列*/
+    letter-spacing: normal;
+    word-spacing: normal;
+    white-space: nowrap;
+}
+
+button:hover{
+    background-color: rgba(0, 136, 169, 0.7);
+}
+
+.toggle{
+    position: relative; /*相对定位，可以使用top left等等调整位置*/
+    background: url('../assets/menu.png'); /*上级路径*/
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat; /*背景平铺方式，repeat的话就会平铺很多份图片*/
+    background-size: 30px;
+    background-position: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+.logo{
+    transition: all 0.3s ease-in-out;
+}
+
+video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.showcase {
+    display: flex;
+    min-height: 85vh;
+    align-items: center;
+    padding: 100px;
+    transition: 0.3s;
+}
+
+.text {
+    position: absolute;
+    top: 40%;
+    color: white;
+}
+
+.text h2 {
+    font-size: 3em;
+    font-weight: 8; /*粗细*/
+    line-height: 1em; /*行间距*/
+}
+
+.text h3 {
+    font-size: 3em;
+    font-weight: 800;
+    line-height: 1em;
+}
+
+.text p {
+    font-size: 1.1em;
+    margin: 20px 0;
+    font-weight: 400;
+    max-width: 500px;
+}
+
+.text a {
+    display: inline-block;
+    font-size: 1em;
+    background: #fff;
+    padding: 10px 30px;
+    color: #111;
+    transition: 0.2s;
+}
+
+.text a:hover {
+    letter-spacing: 6px;
+}
+
+.bar ul {
+    display: none;
+}
+
+@media (max-width: 900px) { /*根据窗口大小选择合适样式*/
+    header{
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 5%;
+        position: relative;
+    }
+
+    .nav_links{
+        opacity: 0; /*不透明度，实现渐隐效果*/
+        visibility: hidden;
+    }
+
+    .logo{
+        position: absolute;
+        left: 40%;
+        transform: translateX(-50%);
+        top: 10%;
+    }
+    /* .logo{
+        position: absolute;
+        left: 50%;
+    } */
+
+    .toggle{
+    position: absolute; /*相对定位，可以使用top left等等调整位置*/
+    margin-left: 0;
+    background: url('../assets/menu.png');
+    left: 0;
+    margin-left: auto;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat; /*背景平铺方式，repeat的话就会平铺很多份图片*/
+    background-size: 30px;
+    background-position: center;
+    cursor: pointer;
+    opacity: 1;
+    visibility: visible;
+    }
+
+    .toggle.active {
+        background: url(../assets/close.png);
+        background-repeat: no-repeat;
+        background-size: 30px;
+        background-position: center;
+        cursor: pointer;
+    }
+
+    .showcase {
+        padding: 10px;
+    }
+
+    .text {
+        top: 33%;
+    }
+
+    .text h2 {
+        line-height: 2em;
+        font-size: 2em;
+    }
+
+    .bar.control {
+        list-style: none;
+    }
+
+    .bar nav ul.control li a {
+        font-size: 1.5em;
+        font-weight: 700;
+        line-height: 100px;
+    }
+
+    .bar ul {
+        list-style: none;
+        display: block;
+        opacity: 0;
+        top:0%;
+        left:0%;
+        position: fixed;
+        width: 0%;
+        height: 100vh;
+        background:rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        backdrop-filter:blur(10px);
+        z-index: 0;
+        transition: 0.3s ease;
+        pointer-events: none;
+    }
+
+    .bar ul.control.active {
+        opacity: 1;
+        top:0%;
+        left:0%;
+        position: fixed;
+        width: 60%;
+        height: 100vh;
+        background:rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        backdrop-filter:blur(10px);
+        z-index: 0;
+        pointer-events: all;
+    }
+}
+
+@media (max-width: 370px) {
+    .logo {
+            position: absolute;
+            left: 40%;
+            transform: translateX(-50%);
+            top: 22%;
+        }
+}

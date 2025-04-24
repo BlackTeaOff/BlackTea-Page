@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你被骗了！！！！</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/rickroll.css') }}">
+</head>
+
+<body>
+    <h1>你被骗了！！！！</h1>
+    <video src="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4" autoplay muted></video>
+</body>
+    <script>
+        let h1 = document.querySelector('h1');
+        setInterval(function() {
+            h1.innerText = " ";
+            setTimeout(function() {
+                h1.innerText = "你被骗了！！！！";
+            }, 500);
+        }, 1000);
+    </script>
+</html>

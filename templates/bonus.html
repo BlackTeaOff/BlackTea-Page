@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <style>
+        .logo {
+            color: rgb(255, 255, 255)
+        }
+
+        .counter {
+            color: #313131;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_counter.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_bonus.css') }}">
+    <title>恭喜你找到了彩蛋！</title>
+</head>
+
+<body>
+
+    <!-- <div class="background"></div> -->
+    <section class="bg">
+        {% for i in range(0, 500) %}
+        <div class="background"></div>
+        {% endfor %}
+    </section>
+
+    <header>
+        <a href="https://space.bilibili.com/111118089">
+            <h1 class="logo">BlackTea</h1>
+        </a>
+        <div class="toggle"></div> <!--菜单-->
+        <nav>
+            <ul class="nav_links">
+                <li><a href="http://192.168.246.97:5001">在线vscode</a></li> <!--a超链接-->
+                <li><a href="/counterpage">Counter</a></li>
+                <li><a href="/rythem">RythemDoctor</a></li>
+            </ul>
+        </nav>
+        <a href="https://vdse.bdstatic.com//192d9a98d782d9c74c96f09db9378d93.mp4"
+            class="cta"><button>Contact</button></a>
+    </header>
+
+    <section>
+        <h1 id="text_1">恭喜!</h1>
+        <h1 id="text_2">你找到了真正的彩蛋页！</h1>
+        <!-- <h2 id="text_3">请在下方输入你的名字</h2> -->
+    </section>
+
+    <form class="input" action="/data_bonus" method="post">
+        <input type="text" id="name" name="name" placeholder="请输入你的名字"> <!--用name属性查找-->
+        <button id="submit" type="submit">提交{{ status }}</button>
+    </form>
+
+
+    <a href="/">
+        <button class="return">主菜单</button>
+    </a>
+
+    <section class="bar">
+        <nav>
+            <ul class="control">
+                <li><a href="http://192.168.246.97:5001">在线vscode</a></li>
+                <li><a href="/counterpage">Counter</a></li>
+                <li><a href="/rythem">RythemDoctor</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <script>
+        let menuToggle = document.querySelector('.toggle');
+            let baractive = document.querySelector('.control');
+
+            menuToggle.addEventListener('click', function () {
+                menuToggle.classList.toggle('active'); //用来切换类名
+                baractive.classList.toggle('active');
+            })
+    </script>
+
+</body>
+
+</html>
